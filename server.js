@@ -1,5 +1,6 @@
 const express = require('express')
 const {spawn} = require('child_process')
+const bcrypt = require('bcrypt')
 const app = express()
 const port = 3000
 
@@ -15,7 +16,6 @@ app.get('/',(req,res) =>{
     // res.send({"message":"helloo"})
     const python = spawn('python', ['main.py'])
     python.stdout.on('data',(data)=>{
-        
         dataToSend = data.toString().trim()
         vals = dataToSend.split(",")
         console.log(vals)
@@ -29,12 +29,16 @@ app.get('/',(req,res) =>{
     
 })
 
+app.get('/loggedin',(req,res)=>{
+    res.sendFile(__dirname+'/web/loggedin.html')
+})
+
 app.post('/submit',(req,res)=>{
     data = req.body
     console.log(data)
     var arr = data.data.split(",");
     console.log(arr)
-    if (vals[0]==arr[0] && vals[1]==arr[1]){
+    if (vals[0].trim()==arr[0].trim() && vals[1].trim()==arr[1].trim()){
         res.send({"message":"success"})
     }
     else{

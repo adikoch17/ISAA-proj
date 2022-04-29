@@ -1,5 +1,6 @@
 from PIL import Image , ImageDraw , ImageFont
 from random_word import RandomWords
+import bcrypt
 
 r = RandomWords()
 
@@ -31,4 +32,15 @@ new2 = new2.resize((50,300))
 new.save('python/new1.png')
 new2.save('python/new2.png')
 
+
+newmsg1 = msg1.encode('utf-8')
+newmsg2 = msg2.encode('utf-8')
+
 print(msg1+","+msg2)
+# print(str(bcrypt.hashpw(newmsg1,bcrypt.gensalt(10)).decode("utf-8")),",",str(bcrypt.hashpw(newmsg2,bcrypt.gensalt(10)).decode("utf-8")))
+# p1 = bcrypt.hashpw(newmsg1,bcrypt.gensalt(10))
+# p2 = bcrypt.hashpw(newmsg1,bcrypt.gensalt(10))
+# print(p1)
+# print(p2)
+# print(bcrypt.checkpw(newmsg1,p1))
+# print(bcrypt.checkpw(newmsg1,p2))

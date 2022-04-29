@@ -6,6 +6,9 @@ var i1 = document.getElementById("i1");
 var i2 = document.getElementById("i2");
 var img1 = document.getElementById("img1")
 var img2 = document.getElementById("img2")
+var log = document.getElementById("log")
+var modal = document.getElementById('id01');
+var passed = false;
 
 console.log(img1,img2)
 
@@ -33,9 +36,22 @@ sub.onclick = ()=>{
     .then(data => {
         if(data.message=='success'){
             window.alert("CAPTCHA passed")
+            passed = true
+            modal.style.display = "none";
         }
         else{
             window.alert("CAPTCHA failed" )
+            modal.style.display = "none";
         }
     })
+}
+
+log.onclick = () =>{
+    if(passed == true){
+        window.location.replace("http://localhost:3000/loggedin");
+    }
+    else{
+        window.alert("please complete captcha to log in")
+    }
+
 }
